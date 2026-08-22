@@ -1,3 +1,5 @@
+pragma ComponentBehavior: Bound
+
 import QtQuick
 import QtQuick.Controls.Material
 import QtQuick.Layouts
@@ -5,7 +7,7 @@ import QtQuick.Layouts
 import LoggerKit.Theme
 
 // M3 outlined surface — card/pane standard (surfaceContainerLow + border).
-// contentItem is ColumnLayout (same pattern as StatCard) so Layout.* children size correctly.
+// contentItem is ColumnLayout so Layout.* children size correctly.
 Pane {
     id: root
 

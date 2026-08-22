@@ -1,3 +1,5 @@
+pragma ComponentBehavior: Bound
+
 pragma Singleton
 import QtQuick
 
@@ -7,7 +9,7 @@ QtObject {
     // hardcoding the "monospace" family string at call sites.
     readonly property string monoFamily: "monospace"
 
-    // Display / large numbers (StatCard values)
+    // Display / large numbers
     readonly property font displaySmall: Qt.font({
         pixelSize: 36,
         weight: Font.Normal
@@ -72,7 +74,7 @@ QtObject {
         weight: Font.Medium
     })
 
-    // StatCard labels — overline style
+    // Overline / eyebrow labels
     readonly property font overline: Qt.font({
         pixelSize: 12,
         weight: Font.Medium,

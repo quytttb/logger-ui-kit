@@ -100,7 +100,7 @@ Popup {
             id: monthGrid
             month: datePicker.selectedDate.getMonth()
             year: datePicker.selectedDate.getFullYear()
-            locale: Qt.locale("en_US")
+            locale: Qt.locale()
             Layout.fillWidth: true
             Layout.fillHeight: true
 

@@ -34,13 +34,18 @@ if(LOGGERKIT_STANDALONE)
     )
     qt_standard_project_setup(REQUIRES 6.11)
     qt_policy(SET QTP0004 NEW)
+    enable_testing()
 
+    # Source tree intentionally deviates from URI layout (src/theme vs
+    # LoggerKit/Theme), so point the build-tree QML root explicitly; without it
+    # qmllint/qmlcachegen cannot resolve cross-module imports in this layout.
     set(QT_QML_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}" CACHE PATH
         "QML build-tree root; qt_add_qml_module appends URI path segments")
 endif()
 
 add_subdirectory(src/theme)
 add_subdirectory(src/components)
+add_subdirectory(tests)
 
 if(LOGGERKIT_STANDALONE)
     # Aggregate qmllint across every module in the kit.

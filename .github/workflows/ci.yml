@@ -1,0 +1,50 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lint-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Install OpenGL system libs
+        # qmllint itself doesn't link OpenGL but CMake configure does.
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libgl1-mesa-dev libfontconfig1-dev libxkbcommon-dev
+
+      - name: Install Qt
+        uses: jurplel/install-qt-action@v4.3.1
+        with:
+          version: '6.11.*'
+          host: linux
+          target: desktop
+          arch: linux_gcc_64
+          modules: 'qtgraphs'
+          dir: ${{ runner.workspace }}
+          install-deps: false
+          cache: true
+          cache-key-prefix: qt6.11-linux-kit
+
+      - name: Configure (standalone)
+        run: cmake -S . -B build-ci -DCMAKE_BUILD_TYPE=Release
+
+      - name: Build
+        run: cmake --build build-ci -j"$(nproc)"
+
+      - name: qmllint
+        run: cmake --build build-ci --target qmllint
+
+      - name: Tests (Qt Quick Test smoke)
+        run: ctest --test-dir build-ci --output-on-failure

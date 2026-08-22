@@ -39,3 +39,15 @@ Requires `find_package(Qt6 6.11 COMPONENTS Quick QuickControls2 Qml Gui Graphs)`
 cmake -B build -DCMAKE_PREFIX_PATH=$HOME/Qt/6.11.1/gcc_64 -DCMAKE_CXX_COMPILER=g++-15
 cmake --build build --target qmllint
 ```
+
+## Tests (standalone)
+
+```bash
+cmake -B build -DCMAKE_PREFIX_PATH=$HOME/Qt/6.11.1/gcc_64
+cmake --build build
+ctest --test-dir build --output-on-failure   # Qt Quick Test smoke suite
+```
+
+## License
+
+MIT — see [LICENSE](LICENSE).

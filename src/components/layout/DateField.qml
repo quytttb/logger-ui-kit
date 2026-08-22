@@ -1,3 +1,5 @@
+pragma ComponentBehavior: Bound
+
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Controls.Material
@@ -11,6 +13,7 @@ Item {
 
     property alias text: field.text
     property date date: parseDate(field.text)
+    readonly property alias pickerPopup: picker
     property var initialDate: new Date()
     property string placeholderText: ""
 

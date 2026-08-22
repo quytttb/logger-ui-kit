@@ -1,3 +1,5 @@
+pragma ComponentBehavior: Bound
+
 import QtQuick
 
 // Data area: children when hasData; otherwise EmptyStatePlaceholder only.

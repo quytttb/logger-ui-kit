@@ -1,3 +1,5 @@
+pragma ComponentBehavior: Bound
+
 pragma Singleton
 import QtQuick
 
@@ -102,7 +104,10 @@ QtObject {
         case "stop":                return stop
         case "restartAlt":          return restartAlt
         case "restart_alt":         return restartAlt
-        default:                    return close
+        default:
+            if (name !== "")
+                console.warn("MaterialIcons: unknown icon name:", name)
+            return close
         }
     }
 }
