@@ -16,6 +16,16 @@ Button {
     property bool   iconOnly: false
     property string tooltipText: ""
 
+    // Optional custom fill for a filled (Primary) button — e.g. semantic
+    // Start (green) / Stop (red) actions. Ignored unless kind === Primary and
+    // the color is opaque. Foreground still uses effectiveFgColor (dark text on
+    // bright fills), matching the default Primary treatment.
+    property color fillColor: "transparent"
+    readonly property bool hasCustomFill: kind === AppButton.Primary && fillColor.a > 0
+
+    // Spins the icon (e.g. refresh while loading). Default off.
+    property bool iconSpinning: false
+
     // Square footprint for icon-only buttons; also drives default implicitHeight.
     property int controlSize: AppTheme.buttonHeight
     property int iconSide: 18
@@ -106,7 +116,7 @@ Button {
             if (!root.enabled)
                 return "transparent"
             if (root.kind === AppButton.Primary)
-                return AppColors.primaryColor
+                return root.hasCustomFill ? root.fillColor : AppColors.primaryColor
             if (root.kind === AppButton.Secondary)
                 return root.pressed || root.down || root.hovered
                        ? AppColors.hoverFill
@@ -128,6 +138,14 @@ Button {
             Layout.preferredWidth: root.iconSide
             Layout.preferredHeight: root.iconSide
             Layout.alignment: Qt.AlignVCenter
+
+            RotationAnimator on rotation {
+                from: 0
+                to: 360
+                duration: AppTheme.motionPulse
+                loops: Animation.Infinite
+                running: root.iconSpinning
+            }
         }
 
         // Text (not Label) — Material Label ignores color and uses theme foreground (black in light).

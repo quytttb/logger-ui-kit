@@ -29,6 +29,13 @@ QtObject {
     readonly property int dialogMaxWidth:              880
     readonly property int dialogNarrowMaxWidth:        520
 
+    // Spacing scale (px) — use instead of inline numeric spacing/margins.
+    readonly property int spacingXS:            4
+    readonly property int spacingS:             8
+    readonly property int spacingSM:           12
+    readonly property int spacingM:            16
+    readonly property int spacingL:            24
+
     // Motion — standard animation durations (ms). Use instead of inline duration literals.
     readonly property int motionFast:           120         // hover / micro state changes
     readonly property int motionStandard:       150         // common transitions
