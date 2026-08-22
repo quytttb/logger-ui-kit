@@ -35,7 +35,8 @@ jobs:
           host: linux
           target: desktop
           arch: linux_gcc_64
-          modules: 'qtgraphs'
+          # Qt Graphs depends on Quick3D (3D graphs) since 6.9 — install its chain too.
+          modules: 'qtgraphs qtquick3d qtshadertools'
           dir: ${{ runner.workspace }}
           install-deps: false
           aqtsource: ${{ env.AQT_SOURCE }}
