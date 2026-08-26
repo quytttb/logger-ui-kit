@@ -15,6 +15,13 @@ QtObject {
         weight: Font.Normal
     })
 
+    // M3 Headline Small — page/section headings that must read as headings,
+    // one clear step above card titles (titleSmall/Medium).
+    readonly property font headlineSmall: Qt.font({
+        pixelSize: 24,
+        weight: Font.Normal
+    })
+
     // Largest title step (dialog / page headers)
     readonly property font titleLarge: Qt.font({
         pixelSize: 18,
