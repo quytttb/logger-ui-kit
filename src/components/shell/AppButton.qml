@@ -127,38 +127,50 @@ Button {
         }
     }
 
-    contentItem: RowLayout {
-        spacing: root.iconName.length > 0 ? 8 : 0
-        Layout.alignment: Qt.AlignHCenter
+    contentItem: Item {
+        implicitWidth: contentRow.implicitWidth
+        implicitHeight: contentRow.implicitHeight
 
-        UiIcon {
-            visible: root.iconName.length > 0
-            name: root.iconName
-            size: root.iconSide
-            iconColor: root.effectiveFgColor
-            horizontalAlignment: Text.AlignHCenter
-            Layout.preferredWidth: root.iconSide
-            Layout.preferredHeight: root.iconSide
-            Layout.alignment: Qt.AlignVCenter
+        // Centered as a group (icon + label stay together in the middle).
+        // A bare RowLayout would fill the button width and pack children left.
+        RowLayout {
+            id: contentRow
+            anchors.centerIn: parent
+            spacing: root.iconName.length > 0 && !root.iconOnly ? 8 : 0
 
-            RotationAnimator on rotation {
-                from: 0
-                to: 360
-                duration: AppTheme.motionPulse
-                loops: Animation.Infinite
-                running: root.iconSpinning
+            UiIcon {
+                id: iconItem
+                visible: root.iconName.length > 0
+                name: root.iconName
+                size: root.iconSide
+                iconColor: root.effectiveFgColor
+                horizontalAlignment: Text.AlignHCenter
+                Layout.preferredWidth: root.iconSide
+                Layout.preferredHeight: root.iconSide
+                Layout.alignment: Qt.AlignVCenter
+
+                RotationAnimator on rotation {
+                    from: 0
+                    to: 360
+                    duration: AppTheme.motionPulse
+                    loops: Animation.Infinite
+                    running: root.iconSpinning
+                    // Otherwise the icon freezes mid-spin when loading ends.
+                    onStopped: iconItem.rotation = 0
+                }
             }
-        }
 
-        // Text (not Label) — Material Label ignores color and uses theme foreground (black in light).
-        Text {
-            visible: !root.iconOnly
-            text: root.text
-            font: root.font
-            color: root.effectiveFgColor
-            horizontalAlignment: Text.AlignHCenter
-            verticalAlignment: Text.AlignVCenter
-            Layout.alignment: Qt.AlignVCenter
+            // Text (not Label) — Material Label ignores color and uses theme foreground (black in light).
+            Text {
+                visible: !root.iconOnly
+                text: root.text
+                font: root.font
+                color: root.effectiveFgColor
+                horizontalAlignment: Text.AlignHCenter
+                verticalAlignment: Text.AlignVCenter
+                elide: Text.ElideRight
+                Layout.alignment: Qt.AlignVCenter
+            }
         }
     }
 }

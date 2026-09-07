@@ -57,7 +57,7 @@ QtObject {
 
     // Touch mode (kiosk) enlarges controls to ≥48dp finger targets; desktop = 40dp.
     readonly property int buttonHeight:       ThemeMode.touch ? 48 : 40
-    readonly property int buttonRadius:       buttonHeight / 2      // full round ends
+    readonly property int buttonRadius:       8               // slightly rounded rect (pill ends looked broken on kiosk)
     readonly property int buttonPaddingH:     24
     readonly property int iconButtonSize:     ThemeMode.touch ? 48 : 40  // square icon-only target
     readonly property int navPillHeight:        32
