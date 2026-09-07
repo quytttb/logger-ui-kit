@@ -136,7 +136,9 @@ Button {
         RowLayout {
             id: contentRow
             anchors.centerIn: parent
-            spacing: root.iconName.length > 0 && !root.iconOnly ? 8 : 0
+            // No gap when there is no visible label — otherwise an icon-only
+            // button without iconOnly:true renders 8px off-center.
+            spacing: (root.iconName.length > 0 && !root.iconOnly && root.text.length > 0) ? 8 : 0
 
             UiIcon {
                 id: iconItem
