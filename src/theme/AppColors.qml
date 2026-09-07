@@ -71,7 +71,10 @@ QtObject {
     readonly property color outline:        isDark ? "#938F99" : "#79747E"
     readonly property color outlineVariant: isDark ? "#49454F" : "#CAC4D0"
 
-    readonly property color error:            isDark ? "#FFB4AB" : "#BA1A1A"
+    // Dark error is intentionally a strong red ("#EF5350"), NOT the M3 spec
+    // pale pink ("#FFB4AB"): error states (alarms, Stop buttons) must read
+    // as red on both the edge kiosk and the desktop app.
+    readonly property color error:            isDark ? "#EF5350" : "#BA1A1A"
     readonly property color errorContainer:   isDark ? "#93000A" : "#FFDAD6"
     readonly property color errorContainerFg: isDark ? "#FFDAD6" : "#410002"
 
