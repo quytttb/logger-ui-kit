@@ -11,7 +11,7 @@ QtObject {
 
     // Display / large numbers
     readonly property font displaySmall: Qt.font({
-        pixelSize: 36,
+        pixelSize: 40,
         weight: Font.Normal
     })
 
@@ -30,48 +30,48 @@ QtObject {
 
     // Section titles, table headers
     readonly property font titleMedium: Qt.font({
-        pixelSize: 16,
+        pixelSize: 18,
         weight: Font.Medium
     })
 
     // Compact title (dense panels / detail headers)
     readonly property font titleSmall: Qt.font({
-        pixelSize: 15,
+        pixelSize: 17,
         weight: Font.Medium
     })
 
     readonly property font titleMediumBold: Qt.font({
-        pixelSize: 16,
+        pixelSize: 18,
         weight: Font.DemiBold
     })
 
     // Body text in tables, secondary info in top bars
     readonly property font bodyMedium: Qt.font({
-        pixelSize: 14,
+        pixelSize: 16,
         weight: Font.Normal
     })
 
     // Dense body text (compact tables / secondary rows)
     readonly property font bodySmall: Qt.font({
-        pixelSize: 13,
+        pixelSize: 14,
         weight: Font.Normal
     })
 
     // Buttons, prominent labels
     readonly property font labelLarge: Qt.font({
-        pixelSize: 14,
+        pixelSize: 15,
         weight: Font.Medium
     })
 
     // Navigation rail labels (NavItem)
     readonly property font labelMedium: Qt.font({
-        pixelSize: 12,
+        pixelSize: 14,
         weight: Font.Medium
     })
 
     // Chips, tooltips, form hints
     readonly property font labelSmall: Qt.font({
-        pixelSize: 11,
+        pixelSize: 12,
         weight: Font.Medium
     })
 
