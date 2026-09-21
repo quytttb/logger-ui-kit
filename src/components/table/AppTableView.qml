@@ -20,6 +20,7 @@ Item {
     property string emptyIconName: "informationOutline"
     property string emptyMessage: ""
     property var headerAlignRight: function(column) { return false }
+    property var headerAlignCenter: function(column) { return false }
 
     readonly property alias rows: dataTable.rows
     readonly property alias tableView: dataTable
@@ -60,6 +61,7 @@ Item {
                     roundTopLeft: column === 0
                     roundTopRight: column === dataTable.colWidths.length - 1
                     alignRight: root.headerAlignRight(column)
+                    alignCenter: root.headerAlignCenter(column)
                 }
             }
 

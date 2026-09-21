@@ -12,6 +12,7 @@ Rectangle {
     required property var model
 
     property bool alignRight: false
+    property bool alignCenter: false
     property real cornerRadius: 0
     property bool roundTopLeft: false
     property bool roundTopRight: false
@@ -41,7 +42,8 @@ Rectangle {
         font: AppTypography.labelLarge
         color: AppColors.tableHeaderText
         verticalAlignment: Text.AlignVCenter
-        horizontalAlignment: cell.alignRight ? Text.AlignRight : Text.AlignLeft
+        horizontalAlignment: cell.alignRight ? Text.AlignRight
+                             : (cell.alignCenter ? Text.AlignHCenter : Text.AlignLeft)
         elide: Text.ElideRight
     }
 
