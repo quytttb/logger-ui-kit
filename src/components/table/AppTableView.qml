@@ -26,19 +26,11 @@ Item {
     readonly property alias tableView: dataTable
     readonly property var colWidths: dataTable.colWidths
 
-    // Whole-row hover: cells set `hoveredRow = row` on hover and highlight when it
-    // matches; resets when the pointer leaves the table.
-    property int hoveredRow: -1
-
     function recomputeColumns() {
         dataTable.recomputeColumns()
     }
 
     property alias delegate: dataTable.delegate
-
-    HoverHandler {
-        onHoveredChanged: if (!hovered) root.hoveredRow = -1
-    }
 
     TableContentStack {
         anchors.fill: parent
