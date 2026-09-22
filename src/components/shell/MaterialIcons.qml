@@ -55,6 +55,8 @@ QtObject {
     readonly property string playArrow:           "\uE037"  // play_arrow
     readonly property string stop:                "\uE047"  // stop
     readonly property string restartAlt:          "\uF053"  // restart_alt
+    readonly property string filterAlt:           "\uEF4F"  // filter_alt
+    readonly property string filterList:          "\uE152"  // filter_list
 
     function glyph(name) {
         switch (name) {
@@ -104,6 +106,10 @@ QtObject {
         case "stop":                return stop
         case "restartAlt":          return restartAlt
         case "restart_alt":         return restartAlt
+        case "filterAlt":           return filterAlt
+        case "filter_alt":          return filterAlt
+        case "filterList":          return filterList
+        case "filter_list":         return filterList
         default:
             if (name !== "")
                 console.warn("MaterialIcons: unknown icon name:", name)
