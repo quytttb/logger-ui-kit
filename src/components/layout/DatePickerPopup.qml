@@ -9,11 +9,12 @@ import LoggerKit.Components
 import LoggerKit.Theme
 
 // M3 outlined calendar popup — non-modal, positioned by DateField below the input.
+// Ô ngày 340x400 cho kiosk touch (cell to hơn bản cũ 320x380).
 Popup {
     id: datePicker
 
-    width: 320
-    height: 380
+    width: 340
+    height: 400
     padding: AppTheme.sectionSpacing
     modal: false
     focus: true
@@ -127,7 +128,7 @@ Popup {
                 }
 
                 color: dayCell.isSelected ? AppColors.accentContainer
-                     : dayMouse.containsMouse && dayCell.isCurrentMonth ? AppColors.hoverFill
+                     : dayHover.hovered && dayCell.isCurrentMonth ? AppColors.hoverFill
                      : "transparent"
 
                 Text {
@@ -146,15 +147,17 @@ Popup {
                     }
                 }
 
-                MouseArea {
-                    id: dayMouse
-                    anchors.fill: parent
-                    hoverEnabled: true
-                    onClicked: {
+                // TapHandler thay MouseArea: tap touch chính xác hơn, không
+                // chặn gesture; HoverHandler riêng cho highlight desktop.
+                TapHandler {
+                    onTapped: {
                         datePicker.selectedDate = dayCell.model.date
                         datePicker.datePicked(dayCell.model.date)
                         datePicker.close()
                     }
+                }
+                HoverHandler {
+                    id: dayHover
                 }
             }
         }

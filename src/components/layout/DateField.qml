@@ -72,10 +72,13 @@ Item {
         leftPadding: 8
         rightPadding: 32
 
-        MouseArea {
-            anchors.fill: parent
+        // TapHandler thay MouseArea: không steal scroll/gesture, đúng cho
+        // kiosk touch (field readOnly nên TextField không tự ăn tap).
+        TapHandler {
+            onTapped: root.openPicker()
+        }
+        HoverHandler {
             cursorShape: Qt.PointingHandCursor
-            onClicked: root.openPicker()
         }
     }
 
