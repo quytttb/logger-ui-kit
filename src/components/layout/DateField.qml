@@ -20,6 +20,18 @@ Item {
     implicitWidth: field.implicitWidth
     implicitHeight: field.implicitHeight
 
+    Accessible.role: Accessible.Button
+    Accessible.name: qsTr("Choose date")
+
+    // TapHandler đặt trên root (bao cả icon schedule) — tap đúng icon
+    // lịch vẫn mở picker; không steal scroll/gesture, đúng cho kiosk touch.
+    TapHandler {
+        onTapped: root.openPicker()
+    }
+    HoverHandler {
+        cursorShape: Qt.PointingHandCursor
+    }
+
     function formatDate(d) {
         const dd = String(d.getDate()).padStart(2, "0")
         const mm = String(d.getMonth() + 1).padStart(2, "0")
@@ -43,9 +55,11 @@ Item {
 
         const gap = 4
         const mapped = field.mapToItem(Overlay.overlay, 0, field.height + gap)
-        picker.x = mapped.x
-        picker.y = mapped.y
-        picker.width = Math.max(280, field.width)
+        picker.width = Math.max(340, field.width)
+        // Clamp vào overlay để popup không tràn màn kiosk 1024x600.
+        const ov = Overlay.overlay
+        picker.x = Math.max(0, Math.min(mapped.x, ov.width - picker.width))
+        picker.y = Math.max(0, Math.min(mapped.y, ov.height - picker.height))
         picker.open()
     }
 
@@ -72,14 +86,8 @@ Item {
         leftPadding: 8
         rightPadding: 32
 
-        // TapHandler thay MouseArea: không steal scroll/gesture, đúng cho
-        // kiosk touch (field readOnly nên TextField không tự ăn tap).
-        TapHandler {
-            onTapped: root.openPicker()
-        }
-        HoverHandler {
-            cursorShape: Qt.PointingHandCursor
-        }
+        Keys.onReturnPressed: root.openPicker()
+        Keys.onSpacePressed: root.openPicker()
     }
 
     UiIcon {

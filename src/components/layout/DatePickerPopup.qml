@@ -116,7 +116,8 @@ Popup {
                 readonly property bool isCurrentMonth: dayCell.model.month === monthGrid.month
                 readonly property bool isToday: {
                     const now = new Date()
-                    return dayCell.model.day === now.getDate()
+                    return dayCell.isCurrentMonth
+                        && dayCell.model.day === now.getDate()
                         && dayCell.model.month === now.getMonth()
                         && dayCell.model.year === now.getFullYear()
                 }
@@ -128,8 +129,8 @@ Popup {
                 }
 
                 color: dayCell.isSelected ? AppColors.accentContainer
-                     : dayHover.hovered && dayCell.isCurrentMonth ? AppColors.hoverFill
-                     : "transparent"
+                     : (dayTap.pressed || dayHover.hovered) && dayCell.isCurrentMonth
+                       ? AppColors.hoverFill : "transparent"
 
                 Text {
                     anchors.centerIn: parent
@@ -150,6 +151,7 @@ Popup {
                 // TapHandler thay MouseArea: tap touch chính xác hơn, không
                 // chặn gesture; HoverHandler riêng cho highlight desktop.
                 TapHandler {
+                    id: dayTap
                     onTapped: {
                         datePicker.selectedDate = dayCell.model.date
                         datePicker.datePicked(dayCell.model.date)
