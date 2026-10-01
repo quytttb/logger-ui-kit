@@ -66,6 +66,10 @@ QtObject {
     readonly property color surfaceContainer:     isDark ? "#323232" : "#F0F2F5"
     readonly property color surfaceContainerHigh: isDark ? "#3D3D3D" : "#E8EBEF"
 
+    /// Card nền dùng cho Monitor grid — xám bút chì, tách rõ khỏi surface (#111318) trên kiosk dark.
+    /// Không dùng surfaceContainerHigh (đã dùng cho pill TaskBar) để tránh xung đột ngữ nghĩa.
+    readonly property color monitorCardBg: isDark ? "#454545" : "#FFFFFF"
+
     readonly property color elevatedBorder: isDark ? "#3A3A3A" : "#D0D5DC"
 
     readonly property color outline:        isDark ? "#938F99" : "#79747E"
