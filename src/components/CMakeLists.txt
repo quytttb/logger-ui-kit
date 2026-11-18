@@ -7,7 +7,7 @@
 #   layout/  — panes, empty states, notifications, date picker
 #   table/   — data table chrome
 #   chart/   — Qt Graphs wrappers
-#   status/  — generic StatusChip
+#   status/  — status chips and live value cards
 
 set_source_files_properties(shell/MaterialIcons.qml PROPERTIES QT_QML_SINGLETON_TYPE TRUE)
 set_source_files_properties(layout/AppNotifier.qml  PROPERTIES QT_QML_SINGLETON_TYPE TRUE)
@@ -22,6 +22,7 @@ qt_add_qml_module(logger_ui_kit_components
     QML_FILES
         # shell
         shell/AppButton.qml
+        shell/ThemedTabButton.qml
         shell/UiIcon.qml
         shell/MaterialIcons.qml
         # layout
@@ -44,6 +45,7 @@ qt_add_qml_module(logger_ui_kit_components
         chart/ChartLinePointMarker.qml
         # status
         status/StatusChip.qml
+        status/SensorValueCard.qml
     RESOURCES
         ../../resources/fonts/MaterialSymbols/MaterialSymbolsOutlined.ttf
         ../../resources/icons/brand_4m_technologies_blue.svg

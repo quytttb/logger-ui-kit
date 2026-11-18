@@ -6,8 +6,8 @@ Shared **Material 3** QML UI kit for the Logger apps: **central_logger** (deskto
 
 | URI | Contents |
 |-----|----------|
-| `LoggerKit.Theme` | `ThemeMode`, `AppColors`, `AppTheme`, `AppTypography`, `QuickControlsConfig` singletons + `ThemeSetup` (C++ `QQuickStyle::setStyle("Material")`) |
-| `LoggerKit.Components` | `AppButton`, `UiIcon`, `MaterialIcons`, `ElevatedPane`, `EmptyStatePlaceholder`, `TableContentStack`, `AppScrollBar`, `AppNotifier`, `AppToastHost`, `MessageDetailDialog`, `DateField`, `DatePickerPopup`, `AppTableView`, `TableHeaderCell`, `TableCellBackground`, `ChartGraphsTheme`, `ChartGraphsView`, `ChartLinePointMarker`, `StatusChip`, and the `ClipboardService` C++ singleton |
+| `LoggerKit.Theme` | `ThemeMode`, `AppColors`, `AppTheme`, `AppTypography`, `IoColors` singletons + `ThemeSetup` (C++ `QQuickStyle::setStyle("Material")`) |
+| `LoggerKit.Components` | `AppButton`, `ThemedTabButton`, `UiIcon`, `MaterialIcons`, `ElevatedPane`, `EmptyStatePlaceholder`, `TableContentStack`, `AppScrollBar`, `AppNotifier`, `AppToastHost`, `MessageDetailDialog`, `DateField`, `DatePickerPopup`, `AppTableView`, `TableHeaderCell`, `TableCellBackground`, `ChartGraphsTheme`, `ChartGraphsView`, `ChartLinePointMarker`, `SensorValueCard`, `StatusChip`, and the `ClipboardService` C++ singleton |
 
 ## Decoupling (no app dependency)
 
@@ -21,6 +21,8 @@ The kit never imports an app's `Core` module. Host-specific state is injected:
 - **Clipboard** — `ClipboardService.copyToClipboard()` / `fileBaseName()` (QClipboard, no app hook).
 - **Notifier context** — `AppNotifier`/`MessageDetailDialog` pass an opaque `contextId` (e.g. a logger id) back to the host; hosts that don't need it ignore `-1`.
 - **StatusChip** — generic: indicator mode (`label` + dot) or status mode (host feeds `chipText` + fill/border/text colors + optional `statusIconName`). Domain logic (operational status, attach-DI type) stays in the host.
+- **ThemedTabButton** — Material-styled `TabButton`; use it in a `TabBar` with `text` and optional `iconName`/`iconGlyph`. Icon-only tabs still use `text` for accessibility and the tooltip.
+- **SensorValueCard** — feed display-ready `name`, `unit`, `value`, `statusText`/`statusColor`, `alarmText`, `limitText` and optional `attachDiLabels`. Set `valid` explicitly; for `"DI"`/`"DO"` set `digitalOn` separately so an unavailable value is never shown as OFF. `compact` defaults to desktop density; override it or `fontScale` as needed. `footerAction` accepts an optional host `Component` (for example, the kiosk calibration button); the kit doesn't know how to invoke app actions or interpret TT10 and thresholds.
 - **Charts timezone** — `ChartGraphsView.timezoneId` (IANA id) set by the host.
 
 ## Integration (host CMake)

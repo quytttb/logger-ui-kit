@@ -4,6 +4,7 @@ set_source_files_properties(ThemeMode.qml PROPERTIES QT_QML_SINGLETON_TYPE TRUE)
 set_source_files_properties(AppColors.qml           PROPERTIES QT_QML_SINGLETON_TYPE TRUE)
 set_source_files_properties(AppTheme.qml            PROPERTIES QT_QML_SINGLETON_TYPE TRUE)
 set_source_files_properties(AppTypography.qml       PROPERTIES QT_QML_SINGLETON_TYPE TRUE)
+set_source_files_properties(IoColors.qml            PROPERTIES QT_QML_SINGLETON_TYPE TRUE)
 
 qt_add_qml_module(logger_ui_kit_theme
     URI LoggerKit.Theme
@@ -14,6 +15,7 @@ qt_add_qml_module(logger_ui_kit_theme
         AppColors.qml
         AppTheme.qml
         AppTypography.qml
+        IoColors.qml
 )
 
 add_library(logger_ui_kit_theme_setup STATIC
