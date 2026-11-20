@@ -51,7 +51,7 @@ Item {
 
         function test_filledIsOptIn() {
             const card = createTemporaryObject(cardComponent, fixture, {
-                fillColor: AppColors.successContainer, frameWidth: 2
+                fillColor: AppColors.successContainer, frameWidth: 2, alarmText: "▲ MAX"
             })
             verify(card)
             compare(card.color, AppColors.monitorCardBg)
@@ -61,6 +61,7 @@ Item {
             compare(card.border.width, 0)
             card.fillColor = AppColors.errorContainer
             compare(card.color, AppColors.errorContainer)
+            compare(findChild(card, "sensorAlarm").textColor, AppColors.errorContainerFg)
         }
 
         function test_digitalUnavailabilityIsNotOff_data() {

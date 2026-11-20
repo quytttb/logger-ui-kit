@@ -233,7 +233,8 @@ Rectangle {
                 objectName: "sensorAlarm"
                 visible: root.alarmText.length > 0
                 text: root.alarmText
-                textColor: AppColors.error
+                textColor: root.filled && Qt.colorEqual(root.fillColor, AppColors.errorContainer)
+                           ? AppColors.errorContainerFg : AppColors.error
                 color: AppColors.withAlpha(AppColors.error, 0.20)
                 border.color: AppColors.error
                 border.width: 1
