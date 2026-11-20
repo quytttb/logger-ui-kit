@@ -25,6 +25,8 @@ Rectangle {
     property color valueColor: alarmText.length > 0 ? AppColors.error : AppColors.primaryText
     property Component footerAction: null
     property int frameWidth: digitalActive ? 2 : 1
+    property bool filled: false
+    property color fillColor: AppColors.monitorCardBg
 
     property bool compact: !ThemeMode.touch
     property real fontScale: 1.0
@@ -47,10 +49,10 @@ Rectangle {
     implicitWidth: compact ? 208 : 228
     implicitHeight: Math.max(compact ? 128 : 160, content.implicitHeight + 2 * AppTheme.spacingSM)
     radius: AppTheme.cardRadius
-    color: AppColors.monitorCardBg
+    color: filled ? fillColor : AppColors.monitorCardBg
     border.color: AppColors.withAlpha(digital ? (digitalActive ? ioAccent : AppColors.outlineVariant)
                                              : statusColor, 0.65)
-    border.width: frameWidth
+    border.width: filled ? 0 : frameWidth
 
     component Badge: Rectangle {
         id: badge

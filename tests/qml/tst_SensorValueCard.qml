@@ -49,6 +49,20 @@ Item {
             compare(findChild(card, "sensorReading").text, "—")
         }
 
+        function test_filledIsOptIn() {
+            const card = createTemporaryObject(cardComponent, fixture, {
+                fillColor: AppColors.successContainer, frameWidth: 2
+            })
+            verify(card)
+            compare(card.color, AppColors.monitorCardBg)
+            compare(card.border.width, 2)
+            card.filled = true
+            compare(card.color, AppColors.successContainer)
+            compare(card.border.width, 0)
+            card.fillColor = AppColors.errorContainer
+            compare(card.color, AppColors.errorContainer)
+        }
+
         function test_digitalUnavailabilityIsNotOff_data() {
             return [{tag: "input", type: "DI"}, {tag: "output", type: "DO"}]
         }
